@@ -1,1 +1,408 @@
-(()=>{function e(e){const t=document.createElement("div");t.className="particle",t.style.cssText=`\n        position: absolute;\n        width: ${4*Math.random()+2}px;\n        height: ${4*Math.random()+2}px;\n        background: rgba(59, 130, 246, ${.5*Math.random()+.2});\n        border-radius: 50%;\n        pointer-events: none;\n        animation: float ${10*Math.random()+10}s linear infinite;\n        left: ${100*Math.random()}%;\n        top: ${100*Math.random()}%;\n        z-index: 1;\n    `,e.appendChild(t)}function t(e,t="info"){const n=document.createElement("div");n.className=`notification notification-${t}`,n.style.cssText=`\n        position: fixed;\n        top: 20px;\n        right: 20px;\n        padding: 1rem 2rem;\n        background: ${"success"===t?"var(--gradient-primary)":"#ef4444"};\n        color: white;\n        border-radius: var(--border-radius);\n        box-shadow: var(--shadow-lg);\n        z-index: 10000;\n        transform: translateX(100%);\n        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n        backdrop-filter: blur(10px);\n        border: 1px solid rgba(255, 255, 255, 0.2);\n    `,n.textContent=e,document.body.appendChild(n),setTimeout(()=>{n.style.transform="translateX(0)"},100),setTimeout(()=>{n.style.transform="translateX(100%)",setTimeout(()=>n.remove(),300)},3e3)}document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();const t=document.querySelector(this.getAttribute("href"));t&&t.scrollIntoView({behavior:"smooth",block:"start"})})}),function(){const e=new IntersectionObserver(e=>{e.forEach(e=>{var t;e.isIntersecting&&(e.target.classList.add("animate-in"),e.target.classList.contains("stat-number")&&function(e){const t=parseInt(e.textContent),n=t/125;let o=0;const r=setInterval(()=>{o+=n,o>=t&&(o=t,clearInterval(r)),e.textContent=Math.floor(o)},16)}(e.target),e.target.classList.contains("skill-item")&&((t=e.target).style.opacity="0",t.style.transform="translateX(-20px)",setTimeout(()=>{t.style.transition="all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",t.style.opacity="1",t.style.transform="translateX(0)"},200*Math.random())))})},{threshold:.1,rootMargin:"0px 0px -50px 0px"});document.querySelectorAll(".fade-in, .stat-number, .skill-item, .service-card").forEach(t=>{e.observe(t)})}(),function(){const e=document.querySelector(".hero-title");if(e){const t=e.textContent;e.textContent="",e.style.borderRight="3px solid var(--primary-color)";let n=0;const o=()=>{n<t.length?(e.textContent+=t.charAt(n),n++,setTimeout(o,100)):setTimeout(()=>{e.style.borderRight="none"},2e3)};setTimeout(o,1e3)}}(),function(){const t=document.querySelector(".hero");if(t)for(let n=0;n<50;n++)e(t)}(),function(){const e=document.querySelector(".mobile-menu-btn"),t=document.querySelector(".nav-links");e&&t&&(e.addEventListener("click",()=>{t.classList.toggle("active"),e.classList.toggle("active")}),document.querySelectorAll(".nav-links a").forEach(n=>{n.addEventListener("click",()=>{t.classList.remove("active"),e.classList.remove("active")})}))}(),function(){const e=document.getElementById("contactForm"),n=document.getElementById("whatsappSubmit");e&&n&&n.addEventListener("click",function(n){n.preventDefault();const o=new FormData(e),r=o.get("name"),a=o.get("email"),s=o.get("phone"),i=o.get("service"),l=o.get("message");if(!r||!a||!l)return void t("Por favor, preencha todos os campos obrigatórios!","error");if(!function(e){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}(a))return void t("Por favor, insira um email válido!","error");let c="Olá! Vim pelo site e gostaria de conversar sobre um projeto.\n\n";c+="*Informações do Contato:*\n",c+=`*Nome:* ${r}\n`,c+=`*Email:* ${a}\n`,s&&(c+=`*Telefone:* ${s}\n`),i&&""!==i&&(c+=`*Tipo de Serviço:* ${{site:"Criação de Site",sistema:"Sistema Web",fullstack:"Desenvolvimento Full Stack",consultoria:"Consultoria",outro:"Outro"}[i]||i}\n`),c+=`\n*Mensagem:*\n${l}`;const d=`https://wa.me/5592993975056?text=${encodeURIComponent(c)}`;window.open(d,"_blank"),t("Redirecionando para o WhatsApp...","success"),setTimeout(()=>{e.reset()},2e3)})}(),function(){const e=document.querySelector(".whatsapp-float");e&&e.addEventListener("click",function(e){e.preventDefault();const t=`https://wa.me/5585999999999?text=${encodeURIComponent("Olá! Gostaria de saber mais sobre seus serviços.")}`;window.open(t,"_blank")})}(),function(){const e=document.querySelector(".header");let t=window.scrollY;window.addEventListener("scroll",()=>{const n=window.scrollY;n>100?(e.classList.add("scrolled"),n>t?e.classList.add("hidden"):e.classList.remove("hidden")):e.classList.remove("scrolled","hidden"),t=n})}(),document.querySelectorAll(".service-card").forEach(e=>{e.addEventListener("mouseenter",function(){this.style.transform="translateY(-10px) rotateX(5deg)",this.style.transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"}),e.addEventListener("mouseleave",function(){this.style.transform="translateY(0) rotateX(0)"})}),document.querySelectorAll(".btn").forEach(e=>{e.addEventListener("click",function(e){const t=document.createElement("span"),n=this.getBoundingClientRect(),o=Math.max(n.width,n.height),r=e.clientX-n.left-o/2,a=e.clientY-n.top-o/2;t.style.cssText=`\n                position: absolute;\n                width: ${o}px;\n                height: ${o}px;\n                left: ${r}px;\n                top: ${a}px;\n                background: rgba(255, 255, 255, 0.3);\n                border-radius: 50%;\n                transform: scale(0);\n                animation: ripple 0.6s linear;\n                pointer-events: none;\n            `,this.style.position="relative",this.style.overflow="hidden",this.appendChild(t),setTimeout(()=>t.remove(),600)})}),window.addEventListener("scroll",()=>{const e=window.pageYOffset;document.querySelectorAll(".parallax").forEach(t=>{const n=t.dataset.speed||.5,o=-e*n;t.style.transform=`translateY(${o}px)`})})});const n=document.createElement("style");n.textContent="\n    @keyframes float {\n        0%, 100% { transform: translateY(0px) rotate(0deg); }\n        33% { transform: translateY(-10px) rotate(1deg); }\n        66% { transform: translateY(5px) rotate(-1deg); }\n    }\n\n    @keyframes ripple {\n        to {\n            transform: scale(4);\n            opacity: 0;\n        }\n    }\n\n    .animate-in {\n        animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;\n    }\n\n    @keyframes slideInUp {\n        from {\n            opacity: 0;\n            transform: translateY(30px);\n        }\n        to {\n            opacity: 1;\n            transform: translateY(0);\n        }\n    }\n\n    .fade-in {\n        opacity: 0;\n        transform: translateY(30px);\n        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);\n    }\n\n    .particle {\n        animation: float 20s linear infinite;\n    }\n",document.head.appendChild(n)})();
+// Animações e efeitos modernos
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar todas as funcionalidades
+    initSmoothScrolling();
+    initScrollAnimations();
+    initTypingEffect();
+    initParticleEffect();
+    initMobileMenu();
+    initContactForm();
+    initFloatingWhatsApp();
+    initHeaderScroll();
+    initModernAnimations();
+});
+
+// Smooth scrolling para links de navegação
+function initSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+// Animações de scroll com Intersection Observer
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+
+                // Animação especial para estatísticas
+                if (entry.target.classList.contains('stat-number')) {
+                    animateCounter(entry.target);
+                }
+
+                // Animação especial para skills
+                if (entry.target.classList.contains('skill-item')) {
+                    animateSkillBar(entry.target);
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Observar elementos para animação
+    document.querySelectorAll('.fade-in, .stat-number, .skill-item, .service-card').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// Efeito de digitação no título hero
+function initTypingEffect() {
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+        const text = heroTitle.textContent;
+        heroTitle.textContent = '';
+        heroTitle.style.borderRight = '3px solid var(--primary-color)';
+
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                heroTitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            } else {
+                // Piscar cursor por alguns segundos
+                setTimeout(() => {
+                    heroTitle.style.borderRight = 'none';
+                }, 2000);
+            }
+        };
+
+        setTimeout(typeWriter, 1000);
+    }
+}
+
+// Efeito de partículas no background
+function initParticleEffect() {
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        // Criar partículas flutuantes
+        for (let i = 0; i < 50; i++) {
+            createParticle(hero);
+        }
+    }
+}
+
+function createParticle(container) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.cssText = `
+        position: absolute;
+        width: ${Math.random() * 4 + 2}px;
+        height: ${Math.random() * 4 + 2}px;
+        background: rgba(59, 130, 246, ${Math.random() * 0.5 + 0.2});
+        border-radius: 50%;
+        pointer-events: none;
+        animation: float ${Math.random() * 10 + 10}s linear infinite;
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        z-index: 1;
+    `;
+    container.appendChild(particle);
+}
+
+// Menu mobile
+function initMobileMenu() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+        });
+
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+            });
+        });
+    }
+}
+
+// Formulário de contato
+function initContactForm() {
+    const form = document.getElementById('contactForm');
+    const whatsappButton = document.getElementById('whatsappSubmit');
+
+    if (form && whatsappButton) {
+        whatsappButton.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const phone = formData.get('phone');
+            const service = formData.get('service');
+            const message = formData.get('message');
+
+            // Validação
+            if (!name || !email || !message) {
+                showNotification('Por favor, preencha todos os campos obrigatórios!', 'error');
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                showNotification('Por favor, insira um email válido!', 'error');
+                return;
+            }
+
+            // Organizar mensagem para WhatsApp
+            let whatsappMessage = `Olá! Vim pelo site e gostaria de conversar sobre um projeto.\n\n`;
+            whatsappMessage += `*Informações do Contato:*\n`;
+            whatsappMessage += `*Nome:* ${name}\n`;
+            whatsappMessage += `*Email:* ${email}\n`;
+
+            if (phone) {
+                whatsappMessage += `*Telefone:* ${phone}\n`;
+            }
+
+            if (service && service !== '') {
+                const serviceNames = {
+                    'site': 'Criação de Site',
+                    'sistema': 'Sistema Web',
+                    'fullstack': 'Desenvolvimento Full Stack',
+                    'consultoria': 'Consultoria',
+                    'outro': 'Outro'
+                };
+                whatsappMessage += `*Tipo de Serviço:* ${serviceNames[service] || service}\n`;
+            }
+
+            whatsappMessage += `\n*Mensagem:*\n${message}`;
+
+            // Redirecionar para WhatsApp
+            const whatsappURL = `https://wa.me/5592993975056?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappURL, '_blank');
+
+            showNotification('Redirecionando para o WhatsApp...', 'success');
+
+            // Limpar formulário após 2 segundos
+            setTimeout(() => {
+                form.reset();
+            }, 2000);
+        });
+    }
+}
+
+// WhatsApp flutuante
+function initFloatingWhatsApp() {
+    const whatsappBtn = document.querySelector('.whatsapp-float');
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const message = 'Olá! Gostaria de saber mais sobre seus serviços.';
+            const whatsappURL = `https://wa.me/5585999999999?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+        });
+    }
+}
+
+// Header dinâmico
+function initHeaderScroll() {
+    const header = document.querySelector('.header');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY > 100) {
+            header.classList.add('scrolled');
+
+            if (currentScrollY > lastScrollY) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+            }
+        } else {
+            header.classList.remove('scrolled', 'hidden');
+        }
+
+        lastScrollY = currentScrollY;
+    });
+}
+
+// Animações modernas adicionais
+function initModernAnimations() {
+    // Animação de hover para cards de serviço
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) rotateX(5deg)';
+            this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        });
+
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) rotateX(0)';
+        });
+    });
+
+    // Animação de ondas para botões
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 0.6s linear;
+                pointer-events: none;
+            `;
+
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+            this.appendChild(ripple);
+
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+
+    // Parallax suave para seções
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.parallax');
+
+        parallaxElements.forEach(element => {
+            const speed = element.dataset.speed || 0.5;
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        });
+    });
+}
+
+// Animação de contador para estatísticas
+function animateCounter(element) {
+    const target = parseInt(element.textContent);
+    const duration = 2000;
+    const step = target / (duration / 16);
+    let current = 0;
+
+    const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+            current = target;
+            clearInterval(timer);
+        }
+        element.textContent = Math.floor(current);
+    }, 16);
+}
+
+// Animação de barra de habilidades
+function animateSkillBar(element) {
+    element.style.opacity = '0';
+    element.style.transform = 'translateX(-20px)';
+
+    setTimeout(() => {
+        element.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        element.style.opacity = '1';
+        element.style.transform = 'translateX(0)';
+    }, Math.random() * 200);
+}
+
+// Validação de email
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Sistema de notificações
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 1rem 2rem;
+        background: ${type === 'success' ? 'var(--gradient-primary)' : '#ef4444'};
+        color: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-lg);
+        z-index: 10000;
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    `;
+    notification.textContent = message;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+// CSS adicional para animações
+const additionalCSS = `
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        33% { transform: translateY(-10px) rotate(1deg); }
+        66% { transform: translateY(5px) rotate(-1deg); }
+    }
+
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+
+    .animate-in {
+        animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .particle {
+        animation: float 20s linear infinite;
+    }
+`;
+
+// Adicionar CSS ao documento
+const style = document.createElement('style');
+style.textContent = additionalCSS;
+document.head.appendChild(style);
