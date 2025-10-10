@@ -206,7 +206,7 @@ function initFloatingWhatsApp() {
         whatsappBtn.addEventListener('click', function(e) {
             e.preventDefault();
             const message = 'Olá! Gostaria de saber mais sobre seus serviços.';
-            const whatsappURL = `https://wa.me/5585999999999?text=${encodeURIComponent(message)}`;
+            const whatsappURL = `https://wa.me/5592993975056?text=${encodeURIComponent(message)}`;
             window.open(whatsappURL, '_blank');
         });
     }
